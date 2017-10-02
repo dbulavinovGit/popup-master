@@ -16,7 +16,6 @@ function initPopup() {
 			opener: '.opener',
 			direction: 'data-direction',
 			popupSlide: '.popup',
-			effect: 'slide',
 			clickOutsideHidden: false,
 			animSpeed: 400
 		}, options);
@@ -28,15 +27,15 @@ function initPopup() {
 			if (this.options.holder) {
 				this.findElements();
 				this.attachEvents();
-				this.slide.addClass(this.getSlideDirectio())
 			}
 		},
 		findElements: function() {
-			this.page = $('html');
+			this.page = $(document);
 			this.holder = $(this.options.holder);
 			this.slide = this.holder.find(this.options.popupSlide);
 			this.opener = this.holder.find(this.options.opener);
 			this.direction = this.opener.attr(this.options.direction);
+			this.slide.addClass(this.direction)
 		},
 		attachEvents: function() {
 			var self = this;
@@ -58,29 +57,12 @@ function initPopup() {
 
 			this.opener.on('click', this.eventHandler);
 		},
-		getSlideDirectio: function() {
-			switch (this.direction) {
-				case 'left':
-					return 'left'
-					break;
-				case 'right':
-					return 'right'
-					break;
-				case 'top':
-					return 'top'
-					break;
-				case 'bottom':
-					return 'bottom'
-					break;
-				default:
-					alert( 'error' );
-			}
-		},
 		isOpen: function() {
 			return this.holder.hasClass(this.options.activeClass)
 		},
 		showSlide: function() {
 			this.holder.addClass(this.options.activeClass);
+
 			if(this.options.clickOutsideHidden) {
 				this.page.on('click', this.outsideClickHandler);
 			}
@@ -99,9 +81,9 @@ function initPopup() {
 			}
 		},
 		destroy: function() {
-			this.slide.removeClass(this.getSlideDirectio());
+			this.slide.removeClass(this.direction);
 			this.holder.removeClass(this.options.activeClass);
-			this.opener.off('click', this.eventHandler);s
+			this.opener.off('click', this.eventHandler);
 		}
 	};
 
