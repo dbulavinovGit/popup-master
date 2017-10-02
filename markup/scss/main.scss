@@ -1,0 +1,92 @@
+$breakpoints: (
+	'xs-phone': 320px,
+	'phone': 480px,
+	'tablet': 768px,
+	'desktop': 1024px,
+	'widescreen': 1200px
+);
+
+// keywords
+$media-expressions: (
+	'screen': 'screen',
+	'print': 'print',
+	'handheld': 'handheld',
+	'landscape': '(orientation: landscape)',
+	'portrait': '(orientation: portrait)',
+	'retina2x': '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)',
+	'retina3x': '(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)'
+);
+
+// ligatured operators ≥ ≤
+
+@import 'vendors/include-media';
+@import 'vendors/normalize';
+
+@import 'base/variables';
+@import 'base/functions';
+@import 'base/mixins';
+@import 'base/helpers';
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/forms';
+
+#wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.popup-holder {
+	border-radius: 6px;
+	padding: 20px;
+	width: 200px;
+	margin: 100px auto;
+
+	&.active {
+		.popup {
+			transform: translate3d(0, 0, 0) !important;
+		}
+	}
+
+	.popup {
+		@include animate(transform);
+
+		overflow: hidden;
+		position: fixed;
+		top: 0;
+		width: 400px;
+		background: green;
+
+		&.left {
+			transform: translate3d(-100%, 0, 0);
+			left: 0;
+		}
+
+		&.right {
+			transform: translate3d(100%, 0, 0);
+			right: 0;
+		}
+
+		&.top {
+			transform: translate3d(0, -100%, 0);
+			top: 0;
+		}
+
+		&.bottom {
+			transform: translate3d(0, 100%, 0);
+			bottom: 0;
+			top: auto;
+		}
+	}
+}
+
+.opener {
+	display: inline-block;
+	vertical-align: top;
+	border-radius: 6px;
+	min-width: 250px;
+	text-align: center;
+	padding: 12px 15px;
+	border: 1px solid #000;
+	color: #000;
+	text-decoration: none;
+}
