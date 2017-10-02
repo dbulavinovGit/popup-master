@@ -5,6 +5,7 @@ jQuery(function() {
 function initPopup() {
 	jQuery('.popup-holder').popup({
 		opener: '.opener',
+		dataDirection: 'data-direction',
 		clickOutsideHidden: true
 	});
 }
@@ -14,8 +15,9 @@ function initPopup() {
 		this.options = $.extend({
 			activeClass: 'active',
 			opener: '.opener',
-			direction: 'data-direction',
 			popupSlide: '.popup',
+			direction: 'top',
+			dataDirection: '',
 			clickOutsideHidden: false,
 			animSpeed: 400
 		}, options);
@@ -34,8 +36,9 @@ function initPopup() {
 			this.holder = $(this.options.holder);
 			this.slide = this.holder.find(this.options.popupSlide);
 			this.opener = this.holder.find(this.options.opener);
-			this.direction = this.opener.attr(this.options.direction);
-			this.slide.addClass(this.direction)
+			this.direction = this.opener.attr(this.options.dataDirection);
+
+			this.options.dataDirection ? this.slide.addClass(this.direction) : this.slide.addClass(this.options.direction)
 		},
 		attachEvents: function() {
 			var self = this;
