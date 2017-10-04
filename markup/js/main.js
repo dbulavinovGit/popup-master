@@ -11,6 +11,8 @@ function initPopup() {
 }
 
 ;(function($){
+	var doc = $(document);
+
 	function Popup(options) {
 		this.options = $.extend({
 			activeClass: 'active',
@@ -32,7 +34,6 @@ function initPopup() {
 			}
 		},
 		findElements: function() {
-			this.page = $(document);
 			this.holder = $(this.options.holder);
 			this.slide = this.holder.find(this.options.popupSlide);
 			this.opener = this.holder.find(this.options.opener);
@@ -67,13 +68,13 @@ function initPopup() {
 			this.holder.addClass(this.options.activeClass);
 
 			if(this.options.clickOutsideHidden) {
-				this.page.on('click', this.outsideClickHandler);
+				doc.on('click', this.outsideClickHandler);
 			}
 		},
 		hideSlide: function() {
 			this.holder.removeClass(this.options.activeClass);
 			if(this.options.clickOutsideHidden) {
-				this.page.off('click', this.outsideClickHandler);
+				doc.off('click', this.outsideClickHandler);
 			}
 		},
 		toggle: function() {

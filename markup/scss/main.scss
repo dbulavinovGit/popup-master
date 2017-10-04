@@ -42,19 +42,23 @@ $media-expressions: (
 	margin: 100px auto;
 
 	&.active {
+
 		.popup {
 			transform: translate3d(0, 0, 0) !important;
+			opacity: 1;
+			visibility: visible;
 		}
 	}
 
 	.popup {
-		@include animate(transform);
-
+		@include animate(transform opacity visibility);
 		overflow: hidden;
 		position: fixed;
 		top: 0;
 		width: 400px;
 		background: green;
+		opacity: 0;
+		visibility: hidden;
 
 		&.left {
 			transform: translate3d(-100%, 0, 0);
@@ -81,12 +85,12 @@ $media-expressions: (
 
 .opener {
 	display: inline-block;
-	vertical-align: top;
 	border-radius: 6px;
 	min-width: 250px;
 	text-align: center;
 	padding: 12px 15px;
 	border: 1px solid #000;
+	vertical-align: top;
 	color: #000;
 	text-decoration: none;
 }
